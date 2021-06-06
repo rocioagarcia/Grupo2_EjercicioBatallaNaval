@@ -28,6 +28,8 @@ public class GameModes {
 		case 2:
 			System.out.println("Modo de juego 'PvC' elegido.");
 			Player player = new Person();
+			System.out.println("Ingrese su nombre: ");
+			player.setName(scan.nextLine());
 			Player com = new Computer();
 			break;
 		default:

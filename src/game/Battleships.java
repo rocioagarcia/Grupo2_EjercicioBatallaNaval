@@ -8,5 +8,4 @@ public class Battleships {
 		Match m1 = new Match();
 		m1.startMatch();
 	}
-
 }

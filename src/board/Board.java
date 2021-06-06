@@ -25,15 +25,15 @@ public class Board {
 		String str = "ABCDEFGHIJ";
 		char[] ch = str.toCharArray();
 		for (char c : ch) {
-			sb.append(c + "\t");
+			sb.append("\t " + c);
 		}
 		sb.append("\n");
 		for (int i = 0; i < cells.length; i++) {
 			for (int j = 0; j < cells.length; j++) {
 				if (j == 0)
-					sb.append((i + 1) + ")\t " + cells[i][j] + ")");
+					sb.append((i + 1) + ")\t(" + cells[i][j] + ")\t");
 				else
-					sb.append("\t(" + cells[i][j] + ")");
+					sb.append("(" + cells[i][j] + ")\t");
 			}
 			sb.append("\n");
 		}
