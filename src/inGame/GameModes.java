@@ -7,6 +7,25 @@ import players.Person;
 import players.Player;
 
 public class GameModes {
+	private Player player1;
+	private Player player2;
+
+	public Player getPlayer1() {
+		return player1;
+	}
+
+	public void setPlayer1(Player player1) {
+		this.player1 = player1;
+	}
+
+	public Player getPlayer2() {
+		return player2;
+	}
+
+	public void setPlayer2(Player player2) {
+		this.player2 = player2;
+	}
+
 	public void chooseGameMode() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println(
@@ -22,15 +41,16 @@ public class GameModes {
 		switch (answer) {
 		case 1:
 			System.out.println("Modo de juego 'CvC' elegido.");
-			Player com1 = new Computer();
-			Player com2 = new Computer();
+			player1 = new Computer();
+			player2 = new Computer();
 			break;
 		case 2:
 			System.out.println("Modo de juego 'PvC' elegido.");
-			Player player = new Person();
+			player1 = new Person();
 			System.out.println("Ingrese su nombre: ");
-			player.setName(scan.nextLine());
-			Player com = new Computer();
+			scan.nextLine();
+			player1.setName(scan.nextLine());
+			player2 = new Computer();
 			break;
 		default:
 			break;

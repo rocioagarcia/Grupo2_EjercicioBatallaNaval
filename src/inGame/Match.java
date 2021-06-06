@@ -20,6 +20,7 @@ public class Match {
 		gm.chooseGameMode();
 		showBoard();
 		setTurn(randomTurn());
+		System.out.println(gm.getPlayer1().getName());
 	}
 
 	public void showBoard() {
