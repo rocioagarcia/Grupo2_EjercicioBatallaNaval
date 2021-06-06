@@ -1,10 +1,8 @@
 package embarkation;
 
-public class Battleship extends Embarkation {
-	@Override
-	public int usedSlotsModifier() {
-		int slotsUsed = 3;
+public class Battleship extends Ship {
 
-		return slotsUsed;
+	public Battleship() {
+		this.slotsUsed = 3;
 	}
 }

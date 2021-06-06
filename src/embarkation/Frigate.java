@@ -1,10 +1,9 @@
 package embarkation;
 
-public class Frigate extends Embarkation {
-	@Override
-	public int usedSlotsModifier() {
-		int slotsUsed = 1;
+public class Frigate extends Ship {
 
-		return slotsUsed;
+	public Frigate() {
+		this.slotsUsed = 1;
 	}
+
 }
