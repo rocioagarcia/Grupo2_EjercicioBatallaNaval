@@ -1,5 +1,5 @@
 package board;
 
-public class PositionBoard {
+public class PositionBoard extends Board {
 
 }

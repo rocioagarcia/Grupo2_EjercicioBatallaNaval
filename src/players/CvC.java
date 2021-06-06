@@ -1,5 +1,7 @@
 package players;
 
-public class CvC {
+import inGame.GameModes;
+
+public class CvC extends GameModes {
 
 }
