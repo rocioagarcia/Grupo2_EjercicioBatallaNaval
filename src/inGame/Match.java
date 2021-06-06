@@ -1,6 +1,8 @@
 package inGame;
 
 import board.Board;
+import board.EnemyBoard;
+import board.PositionBoard;
 
 public class Match {
 	private boolean turn = false;
@@ -21,20 +23,28 @@ public class Match {
 	}
 
 	public void showBoard() {
-		Board bd = new Board();
-		bd.printBoard();
+		System.out.println("Position board:");
+		Board positionBoard = new PositionBoard();
+		positionBoard.printBoard();
+		System.out.println("Main board:");
+		Board enemyBoard = new EnemyBoard();
+		enemyBoard.printBoard();
 	}
 
 	public boolean randomTurn() {
 		boolean rTurn = false;
 		if (Math.random() > 0.5) {
 			rTurn = true;
-			System.out.println(String.format("El turno es de %s"));
+			System.out.println(String.format("El turno es de jugador 1"));
 		} else {
 			rTurn = false;
-			System.out.println("El turno es del jugador 2.");
+			System.out.println("El turno es del jugador 2");
 		}
 
 		return rTurn;
+	}
+
+	public void shotValidator(int x, int y) {
+
 	}
 }

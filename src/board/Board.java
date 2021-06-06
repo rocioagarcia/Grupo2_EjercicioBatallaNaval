@@ -1,14 +1,10 @@
 package board;
 
-public class Board {
+public abstract class Board {
 	private char cells[][] = new char[10][10];
 
 	public Board() {
-		for (int i = 0; i < cells.length; i++) {
-			for (int j = 0; j < cells.length; j++) {
-				cells[i][j] = ' ';
-			}
-		}
+
 	}
 
 	public char[][] getCells() {
