@@ -1,9 +1,11 @@
 package embarkation;
 
-public abstract class Ship {
-	protected static int slotsUsed = 0;
+import board.PositionBoard;
 
-	public static int getSlotsUsed() {
+public abstract class Ship {
+	protected int slotsUsed;
+
+	public int getSlotsUsed() {
 		return slotsUsed;
 	}
 
@@ -16,4 +18,5 @@ public abstract class Ship {
 
 		return slotsUsed;
 	}
+	public abstract void position(PositionBoard pb, String orientation);
 }

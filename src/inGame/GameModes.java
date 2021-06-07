@@ -56,4 +56,9 @@ public class GameModes {
 			break;
 		}
 	}
+	
+	public void startGame() {
+		this.player1.start();
+		this.player2.start();
+	}
 }

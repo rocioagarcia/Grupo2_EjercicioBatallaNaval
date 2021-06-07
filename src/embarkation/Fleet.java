@@ -1,16 +1,38 @@
 package embarkation;
 
-public class Fleet {
+import java.util.ArrayList;
 
-	public void createFleet() {
-		Ship frigate1 = new Frigate();
-		Ship frigate2 = new Frigate();
-		Ship destructor1 = new Destructor();
-		Ship destructor2 = new Destructor();
-		Ship destructor3 = new Destructor();
-		Ship battleShip = new Battleship();
-		Ship submarine1 = new Submarine();
-		Ship submarine2 = new Submarine();
-		Ship aircraftCarrier = new AircraftCarrier();
+import board.PositionBoard;
+
+public class Fleet {
+	private ArrayList<Ship> ships;
+	private PositionBoard positionBoard;
+
+	public ArrayList<Ship> getShips() {
+		return ships;
 	}
+	public void addShip(Ship ship) {
+		this.ships.add(ship);
+	}
+	public PositionBoard getPositionBoard() {
+		return positionBoard;
+	}
+	public void setPositionBoard(PositionBoard positionBoard) {
+		this.positionBoard = positionBoard;
+	}
+	public Fleet () {
+		this.ships = new ArrayList<Ship>(9);
+	}
+	public void createFleet() {
+		this.addShip(new Frigate());
+		this.addShip(new Frigate());
+		this.addShip(new Destructor());
+		this.addShip(new Destructor());
+		this.addShip(new Destructor());
+		this.addShip(new Battleship());
+		this.addShip(new Submarine());
+		this.addShip(new Submarine());
+		this.addShip(new AircraftCarrier());
+	}
+	
 }

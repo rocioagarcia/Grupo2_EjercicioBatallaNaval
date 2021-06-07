@@ -1,11 +1,7 @@
 package board;
 
 public abstract class Board {
-	private char cells[][] = new char[10][10];
-
-	public Board() {
-
-	}
+	protected char cells[][] = new char[10][10];
 
 	public char[][] getCells() {
 		return cells;
@@ -34,5 +30,5 @@ public abstract class Board {
 			sb.append("\n");
 		}
 		System.out.println(sb.toString());
-	}
+	}	
 }
