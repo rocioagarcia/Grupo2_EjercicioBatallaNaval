@@ -6,24 +6,28 @@ import board.PositionBoard;
 import players.Player;
 
 public class Match {
-	private Turn turn = Turn.getInstance();
-
-	public Turn getTurn() {
-		return this.turn;
+	private Turn nextTurn;
+   
+	public Match() {
+		this.nextTurn = new Turn();
+	}
+	public Turn getNextTurn() {
+		return this.nextTurn;
 	}
 
-	public void setTurn(Turn turn) {
-		this.turn = turn;
+	public void setPlayerNextTurn(Player aPlayer) {
+		this.nextTurn.setPlayer(aPlayer);
+	}
+	
+	public Player getPlayerNextTurn() {
+		return(this.nextTurn.getPlayer());
 	}
 
 	public void startMatch() {
-		Player p;
 		GameModes gm = new GameModes();
 		gm.chooseGameMode();
 		turnPlayerStart(gm);
 		gm.startGame();
-		p = turnPlayer();
-		p.shot();//reever
 		showBoard();
 		System.out.println(gm.getPlayer1().getName());
 	}
@@ -39,21 +43,14 @@ public class Match {
 
 	public void turnPlayerStart(GameModes gm) {
 		if (Math.random() > 0.5) {
-			setTurnPlayer(gm.getPlayer1());
-			System.out.println(String.format("El turno es de jugador 1"));
+			setPlayerNextTurn(gm.getPlayer1());
+			System.out.println(String.format("El turno es de jugador 1")+this.getPlayerNextTurn());
 		} else {
-			setTurnPlayer(gm.getPlayer2());
-			System.out.println("El turno es del jugador 2");
+			setPlayerNextTurn(gm.getPlayer2());
+			System.out.println("El turno es del jugador 2" +this.getPlayerNextTurn());
 		}
 	}
-    
-	public void setTurnPlayer(Player player){
-		   this.getTurn().setPlayer(player);
-	}
-	
-	public Player turnPlayer() {
-		return(this.turn.getPlayer());
-	}
+   
 	public void shotValidator(int x, int y) {
 
 	}

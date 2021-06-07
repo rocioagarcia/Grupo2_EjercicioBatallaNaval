@@ -8,7 +8,9 @@ import embarkation.Ship;
 
 public class PositionBoard extends Board {
    private Fleet fleet;
-
+   public static final String VERTICAL = "vertical";
+   public static final String HORIZONTAL = "horizontal";
+   
 public Fleet getFleet() {
 	return fleet;
 }
@@ -17,36 +19,30 @@ public void setFleet(Fleet fleet) {
 	this.fleet = fleet;
 }
 
-public void positionFleet() {
-	ArrayList<Ship> ships = this.fleet.getShips();	
-	//ships.forEach(s->{);
-   // });
+public ArrayList<Ship> getFleetShips(){
+	return(this.fleet.getShips());
 }
+
+public void positionFleet() {
+	ArrayList<Ship> ships = this.getFleetShips();	
+	ships.forEach(s->{boolean ok = false;
+	                  while(!ok) {
+	                	  Point p = new Point(generatePosition(),generatePosition());
+	                	  String orientation = defineOrientation();
+	                	  if(s.canPositionMyself(p,orientation,this))
+	                			  ok = true;	                	  
+	                  }
+	});
+   // });
+} 
 
 public String defineOrientation() {
 	String o;
       if (Math.random() > 0.5) 
-	       o = "verical";
+	       o = VERTICAL;
       else 
-	      o = "horizontal";
+	      o = HORIZONTAL;
       return (o);
-}
-
-public int generatePosition() {
-	return ((int) (Math.random()*(10-1)) + 1);
-}
-
-/*public Point initialPosition (int cantSlotsUsed) {
-	Point p = new Point(this.generatePosition(),this.generatePosition());
-	if (cantSlotsUsed == 1)
-		 return((!(busy(p)))? p : initialPosition(cantSlotsUsed));
-		
-	String orientation = defineOrientation();
-   
-}*/
-
-public boolean busy(Point p) {
-	return((this.cells[p.getX()][p.getY()]) != ' ');
 }
 
 }

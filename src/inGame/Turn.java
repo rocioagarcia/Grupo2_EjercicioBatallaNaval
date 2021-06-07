@@ -2,15 +2,10 @@ package inGame;
 
 import players.Player;
 
-public final class Turn {
-	 private static Turn instance;
-	 private Player player;
+public class Turn {
+	private Player player;
 
-	public static Turn getInstance() {
-	    if (instance == null) {
-	        instance = new Turn();
-	    }
-	    return instance;
+	public Turn () {
 	}
 	public Player getPlayer() {
 		return player;

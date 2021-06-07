@@ -1,5 +1,9 @@
 package board;
 
+import java.util.ArrayList;
+
+import embarkation.Point;
+
 public abstract class Board {
 	protected char cells[][] = new char[10][10];
 
@@ -31,4 +35,21 @@ public abstract class Board {
 		}
 		System.out.println(sb.toString());
 	}	
+	
+	public int generatePosition() {
+		return ((int) (Math.random()*(10-1)) + 1);
+	}
+
+	public boolean isBusyIn(Point p) {
+		return((this.cells[p.getX()][p.getY()]) != ' ');
+	}
+	
+	public void markPointsPositionBoard(ArrayList<Point>arrayPoints) {
+		arrayPoints.forEach(p->{markPosition(p);});
+	}
+	
+	public void markPosition(Point p) {
+		this.cells[p.getX()][p.getY()] = '.';
+	}
+
 }
