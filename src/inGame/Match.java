@@ -45,7 +45,4 @@ public class Match {
 		return rTurn;
 	}
 
-	public void shotValidator(int x, int y) {
-
-	}
 }

@@ -13,10 +13,18 @@ public abstract class Player {
 		this.name = name;
 	}
 
-	public void shot(int x, int y) {
+	public static String shot(String shot, int[][] cells) {
 		Random rand = new Random();
-		x = rand.nextInt(10);
-		y = rand.nextInt(10);
+		int x = (int) rand.nextInt();
+		int y = (int) rand.nextInt();
 
+		if (cells[x][y] == 0)
+			shot = "Agua";
+		else if (cells[x][y] != 0)
+			shot = "Averiado";
+		else
+			shot = "Hundido";
+		return shot;
 	}
+
 }

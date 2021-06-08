@@ -35,4 +35,8 @@ public abstract class Board {
 		}
 		System.out.println(sb.toString());
 	}
+
+	public void shotValidator(int x, int y) {
+
+	}
 }
