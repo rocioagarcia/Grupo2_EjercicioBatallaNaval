@@ -59,8 +59,6 @@ public class GameModes {
 	
 	public void startGame() {
 		this.player1.start();
-		this.player1.getPositionBoard().printBoard();
 		this.player2.start();
-		this.player2.getPositionBoard().printBoard();
 	}
 }

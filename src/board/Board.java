@@ -1,6 +1,6 @@
 package board;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import embarkation.Point;
 
@@ -44,7 +44,7 @@ public abstract class Board {
 		return((this.cells[p.getX()][p.getY()]) != ' ');
 	}
 	
-	public void markPointsPositionBoard(ArrayList<Point>arrayPoints) {
+	public void markPointsPositionBoard(Collection<Point>arrayPoints) {
 		arrayPoints.forEach(p->{markPosition(p);});
 	}
 	

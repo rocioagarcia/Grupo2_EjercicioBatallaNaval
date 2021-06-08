@@ -1,6 +1,6 @@
 package board;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import embarkation.Fleet;
 import embarkation.Point;
@@ -19,12 +19,12 @@ public void setFleet(Fleet fleet) {
 	this.fleet = fleet;
 }
 
-public ArrayList<Ship> getFleetShips(){
+public Collection<Ship> getFleetShips(){
 	return(this.fleet.getShips());
 }
 
 public void positionFleet() {
-	ArrayList<Ship> ships = this.getFleetShips();	
+	Collection<Ship> ships = this.getFleetShips();	
 	ships.forEach(s->{boolean ok = false;
 	                  while(!ok) {
 	                	  Point p = new Point(generatePosition(),generatePosition());

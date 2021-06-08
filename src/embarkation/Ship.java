@@ -1,12 +1,13 @@
 package embarkation;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import board.PositionBoard;
 
 public abstract class Ship {
 	protected int slotsUsed;
-	private ArrayList<Point> points;
+	private Collection<Point> points;
 	
 	public Ship() {
 		 this.points = new ArrayList<Point>();
@@ -38,7 +39,7 @@ public abstract class Ship {
 	}
 	
     public boolean verticalPosition(Point p, PositionBoard pb) {
-    	ArrayList<Point> arrayPoints = new ArrayList<Point>();
+    	Collection<Point> arrayPoints = new ArrayList<Point>();
 		int pos = 1;
 		boolean ok = false;
 		while(!(pb.isBusyIn(p)) & (pos <= this.getSlotsUsed()) ) {

@@ -26,10 +26,12 @@ public class Match {
 	public void startMatch() {
 		GameModes gm = new GameModes();
 		gm.chooseGameMode();
+        gm.startGame();
+        PositionBoard pb = gm.getPlayer1().getPositionBoard();
+        pb.printBoard();
+		System.out.println(gm.getPlayer1());
+		System.out.println(getPlayerNextTurn());
 		turnPlayerStart(gm);
-		gm.startGame();
-		showBoard();
-		System.out.println(gm.getPlayer1().getName());
 	}
 
 	public void showBoard() {
