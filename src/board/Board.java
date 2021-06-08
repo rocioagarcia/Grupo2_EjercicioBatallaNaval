@@ -4,9 +4,17 @@ import java.util.Collection;
 
 import embarkation.Point;
 
-public abstract class Board {
-	protected char cells[][] = new char[10][10];
-
+public abstract class Board {	
+	public static final int MAX = 10;
+    protected char cells[][] = new char[10][10];
+    
+	public Board() {
+		this.cells = new char [MAX][MAX];
+		for(int i = 0; i <= MAX - 1; i++ ) {
+			for(int j = 0; j <= MAX - 1;j++ )
+		        this.cells[i][j] = ' ';	
+		}
+	}
 	public char[][] getCells() {
 		return cells;
 	}
@@ -37,7 +45,7 @@ public abstract class Board {
 	}	
 	
 	public int generatePosition() {
-		return ((int) (Math.random()*(10-1)) + 1);
+		return ((int) (Math.random()*(9-0)) + 0);
 	}
 
 	public boolean isBusyIn(Point p) {

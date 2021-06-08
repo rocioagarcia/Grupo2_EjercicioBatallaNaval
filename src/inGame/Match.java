@@ -27,11 +27,14 @@ public class Match {
 		GameModes gm = new GameModes();
 		gm.chooseGameMode();
         gm.startGame();
-        PositionBoard pb = gm.getPlayer1().getPositionBoard();
-        pb.printBoard();
+        PositionBoard pb1 = gm.getPlayer1().getPositionBoard();
+        PositionBoard pb2 = gm.getPlayer2().getPositionBoard();
+        pb1.printBoard();
+        pb2.printBoard();
 		System.out.println(gm.getPlayer1());
-		System.out.println(getPlayerNextTurn());
 		turnPlayerStart(gm);
+		System.out.println(getPlayerNextTurn());
+	
 	}
 
 	public void showBoard() {

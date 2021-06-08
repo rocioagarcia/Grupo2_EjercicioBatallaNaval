@@ -50,13 +50,15 @@ public abstract class Ship {
 			pos++;
 			ok = true;			
 		}
-		if(ok) 
+		if(ok) {
 			pb.markPointsPositionBoard(arrayPoints);
+			this.setPoints(arrayPoints);
+		}  
 		return (ok);
 	}
 	
 	public boolean horizontalPosition(Point p, PositionBoard pb) {
-		ArrayList<Point> arrayPoints = new ArrayList<Point>();
+		Collection<Point> arrayPoints = new ArrayList<Point>();
 		int pos = 1;
 		boolean ok = false;
 		while(!(pb.isBusyIn(p)) & (pos <= this.getSlotsUsed()) ) {
@@ -67,9 +69,19 @@ public abstract class Ship {
 			pos++;
 			ok = true;			
 		}
-		if(ok) 
-			pb.markPointsPositionBoard(arrayPoints);		
+		if(ok) {
+			pb.markPointsPositionBoard(arrayPoints);
+		    this.setPoints(arrayPoints);
+		}
 		return (ok);
+	}
+
+	public Collection<Point> getPoints() {
+		return points;
+	}
+
+	public void setPoints(Collection<Point> points) {
+		this.points = points;
 	}
 	
 }

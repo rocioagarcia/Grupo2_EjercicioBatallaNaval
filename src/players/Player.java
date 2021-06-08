@@ -30,7 +30,11 @@ public abstract class Player {
 		this.fleet.createFleet();
 		this.positionBoard.setFleet(this.getFleet());
 		this.fleet.setPositionBoard(this.getPositionBoard());
-		//this.positionBoard.positionFleet();
+	    definePositionFleet();
+	}
+	
+	public void definePositionFleet() {
+		positionBoard.positionFleet();
 	}
 	
 	public void shot() {
