@@ -41,39 +41,54 @@ public abstract class Ship {
     public boolean verticalPosition(Point p, PositionBoard pb) {
     	Collection<Point> arrayPoints = new ArrayList<Point>();
 		int pos = 1;
-		boolean ok = false;
-		while(!(pb.isBusyIn(p)) & (pos <= this.getSlotsUsed()) ) {
-			arrayPoints.add(p);
-			int x = p.getX();
-			int y = p.getY() + 1;
-			p = new Point(x,y);
-			pos++;
-			ok = true;			
+		boolean ok = true;	
+	    while (!(pb.isBusyIn(p)) & (pos <= this.getSlotsUsed()) & ok) {
+			          arrayPoints.add(p);			
+			          if(p.getY()+ 1 > 9)
+				            ok = false;
+					  else {
+						     int x = p.getX();
+						     int y = p.getY() + 1;
+						     p = new Point(x,y);
+						     pos++;
+						    
+						}
+
 		}
-		if(ok) {
-			pb.markPointsPositionBoard(arrayPoints);
-			this.setPoints(arrayPoints);
-		}  
-		return (ok);
+		if (ok & (!(pb.isBusyIn(p)))) {
+			//pb.markPointsPositionBoard(arrayPoints);
+		    this.setPoints(arrayPoints);
+		    this.markPoints(pb);
+		    return(true);
+		}
+		else  
+		    return (false);
 	}
 	
 	public boolean horizontalPosition(Point p, PositionBoard pb) {
 		Collection<Point> arrayPoints = new ArrayList<Point>();
 		int pos = 1;
-		boolean ok = false;
-		while(!(pb.isBusyIn(p)) & (pos <= this.getSlotsUsed()) ) {
-			arrayPoints.add(p);
-			int x = p.getX()+ 1;
-			int y = p.getY();
-			p = new Point(x,y);
-			pos++;
-			ok = true;			
+		boolean ok = true;
+		while(!(pb.isBusyIn(p)) & (pos <= this.getSlotsUsed()) & ok) {
+			          arrayPoints.add(p);			
+			          if(p.getX() + 1 > 9)
+				            ok = false;
+					  else {
+						     int x = p.getX() + 1;
+						     int y = p.getY();
+						     p = new Point(x,y);
+						     pos++;
+						    
+						}
 		}
-		if(ok) {
-			pb.markPointsPositionBoard(arrayPoints);
+		if (ok & (!(pb.isBusyIn(p)))) {
+			//pb.markPointsPositionBoard(arrayPoints);
 		    this.setPoints(arrayPoints);
+		    this.markPoints(pb);
+		    return(true);
 		}
-		return (ok);
+		else  
+		    return (false);
 	}
 
 	public Collection<Point> getPoints() {
@@ -83,5 +98,7 @@ public abstract class Ship {
 	public void setPoints(Collection<Point> points) {
 		this.points = points;
 	}
+	
+	public abstract void markPoints(PositionBoard pb);
 	
 }

@@ -52,12 +52,12 @@ public abstract class Board {
 		return((this.cells[p.getX()][p.getY()]) != ' ');
 	}
 	
-	public void markPointsPositionBoard(Collection<Point>arrayPoints) {
-		arrayPoints.forEach(p->{markPosition(p);});
+	public void markPointsPositionBoard(Collection<Point>arrayPoints, char c) {
+		arrayPoints.forEach(p->{markPosition(p, c);});
 	}
 	
-	public void markPosition(Point p) {
-		this.cells[p.getX()][p.getY()] = '.';
+	public void markPosition(Point p, char c) {
+		this.cells[p.getX()][p.getY()] = c;
 	}
 
 }
