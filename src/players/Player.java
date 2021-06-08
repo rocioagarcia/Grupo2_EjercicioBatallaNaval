@@ -2,19 +2,19 @@ package players;
 
 import java.util.Random;
 
-import board.EnemyBoard;
+import board.MainBoard;
 import board.PositionBoard;
 import embarkation.Fleet;
 
 public abstract class Player {
 	private String name = "";
 	private Fleet fleet;
-	private EnemyBoard mainBorad;
+	private MainBoard mainBoard;
 	private PositionBoard positionBoard;
 
 	public Player() {
 		this.fleet = new Fleet();
-		this.mainBorad = new EnemyBoard();
+		this.mainBoard = new MainBoard();
 		this.positionBoard = new PositionBoard();
 	}
 	
@@ -37,6 +37,14 @@ public abstract class Player {
 		positionBoard.positionFleet();
 	}
 	
+	public void showPositionBoard() {
+		positionBoard.printBoard();
+	}
+	
+	public void showMainBoard() {
+		mainBoard.printBoard();
+	}
+	
 	public void shot() {
 		Random rand = new Random();
 		int x = rand.nextInt(10);
@@ -52,12 +60,12 @@ public abstract class Player {
 		this.fleet = fleet;
 	}
 
-	public EnemyBoard getMainBorad() {
-		return mainBorad;
+	public MainBoard getMainBorad() {
+		return mainBoard;
 	}
 
-	public void setMainBorad(EnemyBoard mainBorad) {
-		this.mainBorad = mainBorad;
+	public void setMainBorad(MainBoard mainBorad) {
+		this.mainBoard = mainBorad;
 	}
 
 	public PositionBoard getPositionBoard() {

@@ -1,7 +1,7 @@
 package inGame;
 
 import board.Board;
-import board.EnemyBoard;
+import board.MainBoard;
 import board.PositionBoard;
 import players.Player;
 
@@ -27,22 +27,32 @@ public class Match {
 		GameModes gm = new GameModes();
 		gm.chooseGameMode();
         gm.startGame();
-        PositionBoard pb1 = gm.getPlayer1().getPositionBoard();
-        PositionBoard pb2 = gm.getPlayer2().getPositionBoard();
-        pb1.printBoard();
-        pb2.printBoard();
-		System.out.println(gm.getPlayer1());
-		turnPlayerStart(gm);
-		System.out.println(getPlayerNextTurn());
+        turnPlayerStart(gm);
+        Player p = getPlayerNextTurn();
+        showPositionBoardOf(p);
+        showMainBoardOf(p);
+        //PositionBoard pb1 = gm.getPlayer1().getPositionBoard();
+        //PositionBoard pb2 = gm.getPlayer2().getPositionBoard();
+       // pb1.printBoard();
+       // pb2.printBoard();
 	
 	}
-
+    public void showPositionBoardOf(Player p) {
+    	System.out.println("\t\tTABLERO DE POSICION DEL JUGADOR: "+p);
+    	p.showPositionBoard();
+    }
+    
+    public void showMainBoardOf(Player p) {
+    	System.out.println("\t\tTABLERO PRINCIPAL: "+p);
+    	p.showMainBoard();
+    }
+    
 	public void showBoard() {
 		System.out.println("Position board:");
 		Board positionBoard = new PositionBoard();
 		positionBoard.printBoard();
 		System.out.println("Main board:");
-		Board enemyBoard = new EnemyBoard();
+		Board enemyBoard = new MainBoard();
 		enemyBoard.printBoard();
 	}
 
