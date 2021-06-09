@@ -5,17 +5,23 @@ import java.util.Random;
 import board.MainBoard;
 import board.PositionBoard;
 import embarkation.Fleet;
+import embarkation.Point;
 
 public abstract class Player {
-	private String name = "";
+	
+	protected String name;
+	protected int playerNumber;
+
 	private Fleet fleet;
 	private MainBoard mainBoard;
 	private PositionBoard positionBoard;
 
-	public Player() {
+	public Player(String aName, int number) {
 		this.fleet = new Fleet();
 		this.mainBoard = new MainBoard();
 		this.positionBoard = new PositionBoard();
+		name = aName;
+        playerNumber = number;
 	}
 	
 	public String getName() {
@@ -26,6 +32,14 @@ public abstract class Player {
 		this.name = name;
 	}
     
+	public int getPlayerNumber() {
+		return playerNumber;
+	}
+
+	public void setPlayerNumber(int playerNumber) {
+		this.playerNumber = playerNumber;
+	}
+	
 	public void start() {
 		this.fleet.createFleet();
 		this.positionBoard.setFleet(this.getFleet());
@@ -45,11 +59,10 @@ public abstract class Player {
 		mainBoard.printBoard();
 	}
 	
-	public void shot() {
-		Random rand = new Random();
-		int x = rand.nextInt(10);
-		int y = rand.nextInt(10);
-
+	public abstract Point shot();
+	
+	public int generateShot() {
+		return ((int) (Math.random()*(9-0)) + 0);
 	}
 
 	public Fleet getFleet() {
@@ -60,12 +73,12 @@ public abstract class Player {
 		this.fleet = fleet;
 	}
 
-	public MainBoard getMainBorad() {
+	public MainBoard getMainBoard() {
 		return mainBoard;
 	}
 
-	public void setMainBorad(MainBoard mainBorad) {
-		this.mainBoard = mainBorad;
+	public void setMainBoard(MainBoard mainBoard) {
+		this.mainBoard = mainBoard;
 	}
 
 	public PositionBoard getPositionBoard() {

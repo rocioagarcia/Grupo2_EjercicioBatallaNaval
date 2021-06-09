@@ -3,6 +3,7 @@ package inGame;
 import board.Board;
 import board.MainBoard;
 import board.PositionBoard;
+import embarkation.Point;
 import players.Player;
 
 public class Match {
@@ -31,10 +32,10 @@ public class Match {
         Player p = getPlayerNextTurn();
         showPositionBoardOf(p);
         showMainBoardOf(p);
-        //PositionBoard pb1 = gm.getPlayer1().getPositionBoard();
-        //PositionBoard pb2 = gm.getPlayer2().getPositionBoard();
-       // pb1.printBoard();
-       // pb2.printBoard();
+        Point point = p.shot();
+        Player opponent = determineOpponent(p,gm);
+        checkShot(point, p.getMainBoard(), opponent.getPositionBoard());
+        
 	
 	}
     public void showPositionBoardOf(Player p) {
@@ -47,14 +48,14 @@ public class Match {
     	p.showMainBoard();
     }
     
-	public void showBoard() {
+	/*public void showBoard() {
 		System.out.println("Position board:");
 		Board positionBoard = new PositionBoard();
 		positionBoard.printBoard();
 		System.out.println("Main board:");
 		Board enemyBoard = new MainBoard();
 		enemyBoard.printBoard();
-	}
+	}*/
 
 	public void turnPlayerStart(GameModes gm) {
 		if (Math.random() > 0.5) {
@@ -66,7 +67,18 @@ public class Match {
 		}
 	}
    
-	public void shotValidator(int x, int y) {
-
+	/*public boolean checkShot(Point point, MainBoard mb, PositionBoard pb) {
+          return((markShotMainBoard(point, mb, pb))?true:false);
 	}
+	*/
+	public Player determineOpponent(Player player, GameModes gm) {
+		if(player.getPlayerNumber() == 1)
+			return gm.getPlayer2();
+		else
+			return gm.getPlayer1();
+	}
+	
+/*	public boolean markShotMainBoard(Point point, MainBoard mb, PositionBoard pb) {
+
+	}*/
 }

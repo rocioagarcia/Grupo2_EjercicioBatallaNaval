@@ -7,6 +7,7 @@ import players.Person;
 import players.Player;
 
 public class GameModes {
+	public static final String COMPUTER = "computer";
 	private Player player1;
 	private Player player2;
 
@@ -41,16 +42,15 @@ public class GameModes {
 		switch (answer) {
 		case 1:
 			System.out.println("Modo de juego 'CvC' elegido.");
-			player1 = new Computer();
-			player2 = new Computer();
+			player1 = new Computer(COMPUTER,1);
+			player2 = new Computer(COMPUTER,2);
 			break;
 		case 2:
 			System.out.println("Modo de juego 'PvC' elegido.");
-			player1 = new Person();
 			System.out.println("Ingrese su nombre: ");
-			scan.nextLine();
-			player1.setName(scan.nextLine());
-			player2 = new Computer();
+			String aName = scan.nextLine();
+			player1 = new Person(aName,1);
+			player2 = new Computer(COMPUTER,2);
 			break;
 		default:
 			break;
