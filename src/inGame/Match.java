@@ -14,7 +14,7 @@ public class Match {
 	public static final char DAMAGED = '*';
 	public static final char SUNKEN = 'X';
 	public static final char WATER = 'A';
-	private Turn nextTurn;
+	private Turn nextTurn;//esta variable juardará el jugador q tiene el turno.
    
 	public Match() {
 		this.nextTurn = new Turn();
@@ -34,13 +34,13 @@ public class Match {
 	public void startMatch() {
 		GameModes gm = new GameModes();
 		gm.chooseGameMode();
-        gm.startGame();
+        gm.startGame();// este metodo inicializa el juego, una vez ejecutado este metodo las flotas de cada jugador estaran creadas y posicionadas.
         turnPlayerStart(gm);
         Player p = getPlayerNextTurn();
         showPositionBoardOf(p);
         Player o = determineOpponent(p,gm);
         showPositionBoardOf(o);
-        for(int i = 1; i <= 10; i++) {        	
+        for(int i = 1; i <= 30; i++) {        	
 	        Point shot = p.shot();
 	        System.out.println("Disparo en: X-> "+(shot.getX()+1)+" Y-> "+(shot.getY()+1));
 	        if(resultShot(shot, p, gm)) {
@@ -53,6 +53,20 @@ public class Match {
         }
 	
 	}
+	
+	public void turnPlayerStart(GameModes gm) {
+		//determina el jugador que inicia el juego 
+		//guarda el jugador que inicia en la variable nextTurn
+		if (Math.random() > 0.5) {
+			setPlayerNextTurn(gm.getPlayer1());
+			System.out.println(String.format("El turno es de jugador 1")+this.getPlayerNextTurn());
+		} else {
+			setPlayerNextTurn(gm.getPlayer2());
+			System.out.println("El turno es del jugador 2" +this.getPlayerNextTurn());
+		}
+	}
+   
+	
     public void showPositionBoardOf(Player p) {
     	System.out.println("\t\tTABLERO DE POSICION DEL JUGADOR: "+p);
     	p.showPositionBoard();
@@ -63,16 +77,6 @@ public class Match {
     	p.showMainBoard();
     }
 
-	public void turnPlayerStart(GameModes gm) {
-		if (Math.random() > 0.5) {
-			setPlayerNextTurn(gm.getPlayer1());
-			System.out.println(String.format("El turno es de jugador 1")+this.getPlayerNextTurn());
-		} else {
-			setPlayerNextTurn(gm.getPlayer2());
-			System.out.println("El turno es del jugador 2" +this.getPlayerNextTurn());
-		}
-	}
-   
     public boolean resultShot(Point shot, Player player,  GameModes gm) {
         boolean ok = false;
     	Player opponent = determineOpponent(player, gm);

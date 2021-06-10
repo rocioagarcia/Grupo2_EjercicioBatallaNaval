@@ -13,4 +13,8 @@ public class Computer extends Player {
 	public Point shot() {
 		return (new Point(generateShot(),generateShot()));
 	}
+	
+	public int generateShot() {
+		return ((int) (Math.random()*(9-0)) + 0);
+	}
 }

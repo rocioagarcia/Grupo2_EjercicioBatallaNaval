@@ -11,12 +11,11 @@ public abstract class Player {
 	
 	protected String name;
 	protected int playerNumber;
-
 	private Fleet fleet;
 	private MainBoard mainBoard;
 	private PositionBoard positionBoard;
 
-	public Player(String aName, int number) {
+	public Player(String aName, int number) {//constructor crea un jugador con un nombre y nro de jugador, y crea sus tableros y flota
 		this.fleet = new Fleet();
 		this.mainBoard = new MainBoard();
 		this.positionBoard = new PositionBoard();
@@ -40,31 +39,6 @@ public abstract class Player {
 		this.playerNumber = playerNumber;
 	}
 	
-	public void start() {
-		this.fleet.createFleet();
-		this.positionBoard.setFleet(this.getFleet());
-		this.fleet.setPositionBoard(this.getPositionBoard());
-	    definePositionFleet();
-	}
-	
-	public void definePositionFleet() {
-		positionBoard.positionFleet();
-	}
-	
-	public void showPositionBoard() {
-		positionBoard.printBoard();
-	}
-	
-	public void showMainBoard() {
-		mainBoard.printBoard();
-	}
-	
-	public abstract Point shot();
-	
-	public int generateShot() {
-		return ((int) (Math.random()*(9-0)) + 0);
-	}
-
 	public Fleet getFleet() {
 		return fleet;
 	}
@@ -88,4 +62,36 @@ public abstract class Player {
 	public void setPositionBoard(PositionBoard positionBoard) {
 		this.positionBoard = positionBoard;
 	}
+	
+	public void start() {
+		//crea la flota con sus 9 embarcaciones;
+		this.fleet.createFleet();
+		/* relacion bireccional*/
+		//asigna la flota creada a su tablero de posicion
+		this.positionBoard.setFleet(this.getFleet());
+		//asigna el tablero de posicion a la flota
+		this.fleet.setPositionBoard(this.getPositionBoard());
+		/* fin */
+		//se distribuye la flota en el tablero de posicion
+	    definePositionFleet();
+	}
+	
+	public void definePositionFleet() {
+		//este metedo delega al tablero de posicion distribuir la flota
+		positionBoard.positionFleet();
+	}
+	
+	public void showPositionBoard() {
+		//muestra en pantalla el tablero de posicion del jugador
+		positionBoard.printBoard();
+	}
+	
+	public void showMainBoard() {
+		//muestra en pantalla el tablero principal del jugador
+		mainBoard.printBoard();
+	}
+	
+	
+	public abstract Point shot(); //metodo abstracto del disparar, la implementacion depende del tipo de jugador	
+
 }

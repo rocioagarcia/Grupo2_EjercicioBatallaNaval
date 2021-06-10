@@ -58,6 +58,7 @@ public class GameModes {
 	}
 	
 	public void startGame() {
+		//este metodo le pide a sus jugadores que inicien q inicialicen sus flotas.
 		this.player1.start();
 		this.player2.start();
 	}

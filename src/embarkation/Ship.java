@@ -3,15 +3,17 @@ package embarkation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-
-import board.MainBoard;
 import board.PositionBoard;
-import inGame.Match;
 
 public abstract class Ship {
 	protected int slotsUsed;
 	private Collection<Point> points;
-	protected boolean sunken;
+	protected boolean sunken; //variable para identificar si el barco esta hundido
+	
+	public Ship() {//constructor crea una coleccion de puntos vacia e inicializa su estado de hundido en false
+		 this.points = new ArrayList<Point>();
+		 this.sunken = false;
+	}
 	
 	public boolean isSunken() {
 		return sunken;
@@ -21,17 +23,20 @@ public abstract class Ship {
 		this.sunken = sunken;
 	}
 
-	public Ship() {
-		 this.points = new ArrayList<Point>();
-		 this.sunken = false;
-	}
-
 	public int getSlotsUsed() {
 		return slotsUsed;
 	}
 
 	public void setSlotsUsed(int slotsUsed) {
 		this.slotsUsed = slotsUsed;
+	}
+	
+	public Collection<Point> getPoints() {
+		return points;
+	}
+
+	public void setPoints(Collection<Point> points) {
+		this.points = points;
 	}
 
 	public int usedSlotsModifier() {
@@ -41,8 +46,12 @@ public abstract class Ship {
 	}
 	
 	public void addPoint(Point p) {
+		//agrega un punto de coordenadas x e y en la coleccion de puntos del barco
 		this.points.add(p);
 	}
+	
+	//este metodo marca en el tablero la inicial del barco, es abstracto, xq cada barco coloca su incial en la celda
+	public abstract void markPoints(PositionBoard pb);
 	
 	public boolean canPositionMyself(Point p, String orientation, PositionBoard pb) {
 		if(orientation.equalsIgnoreCase("vertical")) 
@@ -57,19 +66,16 @@ public abstract class Ship {
 		boolean ok = true;	
 	    while (!(pb.isBusyIn(p)) & (pos <= getSlotsUsed()) & ok) {
 			          arrayPoints.add(p);			
-			          if(p.getY()+ 1 > 9)
+			          if(p.getY()+ 1 > 9)//se verifica que el punto a incrementar no supere la dimencion del eje Y del tablero
 				            ok = false;
 					  else {
 						     int x = p.getX();
 						     int y = p.getY() + 1;
 						     p = new Point(x,y);
-						     pos++;
-						    
+						     pos++;						    
 						}
-
 		}
-		if (ok & (!(pb.isBusyIn(p)))) {
-			//pb.markPointsPositionBoard(arrayPoints);
+		if (ok & (!(pb.isBusyIn(p)))) {//verifica que se haya podido posicionar el barco
 		    setPoints(arrayPoints);
 		    markPoints(pb);
 		    return(true);
@@ -84,18 +90,16 @@ public abstract class Ship {
 		boolean ok = true;
 		while(!(pb.isBusyIn(p)) & (pos <= getSlotsUsed()) & ok) {
 			          arrayPoints.add(p);			
-			          if(p.getX() + 1 > 9)
+			          if(p.getX() + 1 > 9)//se verifica que el punto a incrementar no supere la dimencion del eje X del tablero
 				            ok = false;
 					  else {
 						     int x = p.getX() + 1;
 						     int y = p.getY();
 						     p = new Point(x,y);
-						     pos++;
-						    
+						     pos++;						    
 						}
 		}
-		if (ok & (!(pb.isBusyIn(p)))) {
-			//pb.markPointsPositionBoard(arrayPoints);
+		if (ok & (!(pb.isBusyIn(p)))) {//verifica que se haya podido posicionar el barco
 		    setPoints(arrayPoints);
 		    markPoints(pb);
 		    return(true);
@@ -103,29 +107,18 @@ public abstract class Ship {
 		else  
 		    return (false);
 	}
-
-	public Collection<Point> getPoints() {
-		return points;
-	}
-
-	public void setPoints(Collection<Point> points) {
-		this.points = points;
-	}
-	
-	public abstract void markPoints(PositionBoard pb);
 	
 	public char recieveShot(Point p) {
-		char result = '.';
+		char result = '.'; //inicializo en cualquier caracter el resultado
 		if(!(isSunken())) {
-			if(getSlotsUsed() == 1) {
+			if(getSlotsUsed() == 1) {//si la cantidad de casillas que tiene es  = 1 debe setear su variable sunken a true, xq significa q el disparo hundirá el barco
 				setSunken(true);
 				result = 'X';
 			}
-			else {			
+			else				
+			   result = '*';
 			setSlotsUsed(getSlotsUsed()-1);
-			result = '*';
-		    }
-	     }
+	    }		
 		return(result);
 	}
 	
