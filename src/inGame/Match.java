@@ -3,7 +3,9 @@ package inGame;
 import board.Board;
 import board.MainBoard;
 import board.PositionBoard;
+import embarkation.Fleet;
 import embarkation.Point;
+import embarkation.Ship;
 import players.Player;
 
 public class Match {
@@ -32,10 +34,16 @@ public class Match {
         Player p = getPlayerNextTurn();
         showPositionBoardOf(p);
         showMainBoardOf(p);
-        Point point = p.shot();
-        Player opponent = determineOpponent(p,gm);
-        checkShot(point, p.getMainBoard(), opponent.getPositionBoard());
-        
+        for(int i = 1; i <= 10; i++) {
+	        Point shot = p.shot();
+	        System.out.println("Disparo en: X-> "+(shot.getX()+1)+" Y-> "+(shot.getY()+1));
+	        if(resultShot(shot, p, gm)) {
+	        	System.out.println("Disparo exitoso");
+	        	showMainBoardOf(p);
+	        }
+	        else
+	        	System.out.println("No se pudo realizar el disparo");
+        }
 	
 	}
     public void showPositionBoardOf(Player p) {
@@ -47,15 +55,6 @@ public class Match {
     	System.out.println("\t\tTABLERO PRINCIPAL: "+p);
     	p.showMainBoard();
     }
-    
-	/*public void showBoard() {
-		System.out.println("Position board:");
-		Board positionBoard = new PositionBoard();
-		positionBoard.printBoard();
-		System.out.println("Main board:");
-		Board enemyBoard = new MainBoard();
-		enemyBoard.printBoard();
-	}*/
 
 	public void turnPlayerStart(GameModes gm) {
 		if (Math.random() > 0.5) {
@@ -67,10 +66,34 @@ public class Match {
 		}
 	}
    
-	/*public boolean checkShot(Point point, MainBoard mb, PositionBoard pb) {
-          return((markShotMainBoard(point, mb, pb))?true:false);
-	}
-	*/
+    public boolean resultShot(Point shot, Player player,  GameModes gm) {
+        boolean ok = false;
+    	Player opponent = determineOpponent(player, gm);
+    	if(!(opponent.getPositionBoard().isBusyIn(shot))) {
+    		markWater(shot, player.getMainBoard());
+    		markWater(shot, opponent.getPositionBoard());
+    		ok = true;
+    	}
+    	else if(ShipInPosition(shot, opponent.getFleet()) != null){
+    		Ship s = ShipInPosition(shot, opponent.getFleet());
+    		if(s.recieveShot(shot, opponent.getPositionBoard(), player.getMainBoard()))
+    		     ok = true;
+    		else
+    		      ok=false;
+    	}
+    	else
+    		ok=false;
+        return (ok);
+    }
+    
+    public Ship ShipInPosition(Point p, Fleet f) {
+    	return(f.shipIncludePoint(p));
+    }
+	
+    public void markWater(Point shot, Board b) {
+    	b.markPosition(shot,'A');
+    }
+    
 	public Player determineOpponent(Player player, GameModes gm) {
 		if(player.getPlayerNumber() == 1)
 			return gm.getPlayer2();
@@ -78,7 +101,4 @@ public class Match {
 			return gm.getPlayer1();
 	}
 	
-/*	public boolean markShotMainBoard(Point point, MainBoard mb, PositionBoard pb) {
-
-	}*/
 }

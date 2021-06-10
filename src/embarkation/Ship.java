@@ -2,15 +2,27 @@ package embarkation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
+import board.MainBoard;
 import board.PositionBoard;
 
 public abstract class Ship {
 	protected int slotsUsed;
 	private Collection<Point> points;
+	protected boolean sunken;
 	
+	public boolean isSunken() {
+		return sunken;
+	}
+
+	public void setSunken(boolean sunken) {
+		this.sunken = sunken;
+	}
+
 	public Ship() {
 		 this.points = new ArrayList<Point>();
+		 this.sunken = false;
 	}
 
 	public int getSlotsUsed() {
@@ -33,16 +45,16 @@ public abstract class Ship {
 	
 	public boolean canPositionMyself(Point p, String orientation, PositionBoard pb) {
 		if(orientation.equalsIgnoreCase("vertical")) 
-			return(this.verticalPosition(p, pb));
+			return(verticalPosition(p, pb));
 		else
-			return(this.horizontalPosition(p, pb));
+			return(horizontalPosition(p, pb));
 	}
 	
     public boolean verticalPosition(Point p, PositionBoard pb) {
     	Collection<Point> arrayPoints = new ArrayList<Point>();
 		int pos = 1;
 		boolean ok = true;	
-	    while (!(pb.isBusyIn(p)) & (pos <= this.getSlotsUsed()) & ok) {
+	    while (!(pb.isBusyIn(p)) & (pos <= getSlotsUsed()) & ok) {
 			          arrayPoints.add(p);			
 			          if(p.getY()+ 1 > 9)
 				            ok = false;
@@ -57,8 +69,8 @@ public abstract class Ship {
 		}
 		if (ok & (!(pb.isBusyIn(p)))) {
 			//pb.markPointsPositionBoard(arrayPoints);
-		    this.setPoints(arrayPoints);
-		    this.markPoints(pb);
+		    setPoints(arrayPoints);
+		    markPoints(pb);
 		    return(true);
 		}
 		else  
@@ -69,7 +81,7 @@ public abstract class Ship {
 		Collection<Point> arrayPoints = new ArrayList<Point>();
 		int pos = 1;
 		boolean ok = true;
-		while(!(pb.isBusyIn(p)) & (pos <= this.getSlotsUsed()) & ok) {
+		while(!(pb.isBusyIn(p)) & (pos <= getSlotsUsed()) & ok) {
 			          arrayPoints.add(p);			
 			          if(p.getX() + 1 > 9)
 				            ok = false;
@@ -83,8 +95,8 @@ public abstract class Ship {
 		}
 		if (ok & (!(pb.isBusyIn(p)))) {
 			//pb.markPointsPositionBoard(arrayPoints);
-		    this.setPoints(arrayPoints);
-		    this.markPoints(pb);
+		    setPoints(arrayPoints);
+		    markPoints(pb);
 		    return(true);
 		}
 		else  
@@ -101,4 +113,33 @@ public abstract class Ship {
 	
 	public abstract void markPoints(PositionBoard pb);
 	
+	public boolean recieveShot(Point p, PositionBoard pb, MainBoard mb) {
+		if(!(isSunken())) {
+			if(getSlotsUsed() == 1) {
+				setSunken(true);
+				pb.markPointsPositionBoard(getPoints(), 'X');
+				mb.markPointsPositionBoard(getPoints(), 'X');
+			}
+			else {
+				pb.markPosition(p, '*');
+			    mb.markPosition(p, '*');
+			}
+			return(true);
+		}
+		else
+			return(false);
+	}
+	
+	public boolean includePoint(Point point) {
+		boolean ok = false;
+		if(!(points.isEmpty())) {
+			Iterator<Point> it = points.iterator();
+			while (it.hasNext() & !(ok)) {
+				Point p =  it.next();
+				if ((p.getX() == point.getX()) & (p.getY() == point.getY()))
+					ok = true;		
+		    }
+		}
+		return(ok);
+	}
 }

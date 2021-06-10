@@ -2,6 +2,7 @@ package embarkation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import board.PositionBoard;
 
@@ -37,6 +38,18 @@ public class Fleet {
 		addShip(new Submarine());
 		addShip(new Submarine());
 		addShip(new AircraftCarrier());
+	}
+	
+	public Ship shipIncludePoint(Point p) {
+		Iterator<Ship> it = ships.iterator();
+		Ship s = null;
+		boolean ok = false;		
+		while (it.hasNext() & !(ok)) {
+			s =  it.next();
+			if (s.includePoint(p))
+				ok = true;		
+	    }
+		return (s);
 	}
 	
 }
