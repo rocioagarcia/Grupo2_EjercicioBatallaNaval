@@ -9,6 +9,6 @@ public class AircraftCarrier extends Ship {
 	}
 	
 	public void markPoints(PositionBoard pb) {
-		pb.markPointsPositionBoard(this.getPoints(), 'C');
+		pb.markPointsBoard(this.getPoints(), 'C');
 	}
 }

@@ -22,6 +22,6 @@ public class Frigate extends Ship {
 	}
     
 	public void markPoints(PositionBoard pb) {
-		pb.markPointsPositionBoard(this.getPoints(), 'F');
+		pb.markPointsBoard(this.getPoints(), 'F');
 	}
 }

@@ -10,8 +10,8 @@ public abstract class Board {
     
 	public Board() {
 		this.cells = new char [MAX][MAX];
-		for(int i = 0; i <= MAX - 1; i++ ) {
-			for(int j = 0; j <= MAX - 1;j++ )
+		for(int i = 0; i < MAX; i++ ) {
+			for(int j = 0; j < MAX;j++ )
 		        this.cells[i][j] = ' ';	
 		}
 	}
@@ -32,8 +32,8 @@ public abstract class Board {
 			sb.append("\t " + c);
 		}
 		sb.append("\n");
-		for (int i = 0; i < cells.length; i++) {
-			for (int j = 0; j < cells.length; j++) {
+		for (int i = 0; i < MAX; i++) {
+			for (int j = 0; j < MAX; j++) {
 				if (j == 0)
 					sb.append((i + 1) + ")\t(" + cells[i][j] + ")\t");
 				else
@@ -52,7 +52,7 @@ public abstract class Board {
 		return((this.cells[p.getX()][p.getY()]) != ' ');
 	}
 	
-	public void markPointsPositionBoard(Collection<Point>arrayPoints, char c) {
+	public void markPointsBoard(Collection<Point>arrayPoints, char c) {
 		arrayPoints.forEach(p->{markPosition(p, c);});
 	}
 	

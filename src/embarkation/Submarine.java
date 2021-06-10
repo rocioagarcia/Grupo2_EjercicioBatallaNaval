@@ -9,6 +9,6 @@ public class Submarine extends Ship {
 	}
 	
 	public void markPoints(PositionBoard pb) {
-		pb.markPointsPositionBoard(this.getPoints(), 'S');
+		pb.markPointsBoard(this.getPoints(), 'S');
 	}
 }

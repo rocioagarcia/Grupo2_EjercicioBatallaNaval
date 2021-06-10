@@ -9,6 +9,6 @@ public class Destructor extends Ship {
 	}
 	
 	public void markPoints(PositionBoard pb) {
-		pb.markPointsPositionBoard(this.getPoints(), 'D');
+		pb.markPointsBoard(this.getPoints(), 'D');
 	}
 }

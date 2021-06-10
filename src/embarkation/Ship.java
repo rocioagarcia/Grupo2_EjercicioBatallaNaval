@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import board.MainBoard;
 import board.PositionBoard;
+import inGame.Match;
 
 public abstract class Ship {
 	protected int slotsUsed;
@@ -113,21 +114,19 @@ public abstract class Ship {
 	
 	public abstract void markPoints(PositionBoard pb);
 	
-	public boolean recieveShot(Point p, PositionBoard pb, MainBoard mb) {
+	public char recieveShot(Point p) {
+		char result = '.';
 		if(!(isSunken())) {
 			if(getSlotsUsed() == 1) {
 				setSunken(true);
-				pb.markPointsPositionBoard(getPoints(), 'X');
-				mb.markPointsPositionBoard(getPoints(), 'X');
+				result = 'X';
 			}
-			else {
-				pb.markPosition(p, '*');
-			    mb.markPosition(p, '*');
-			}
-			return(true);
-		}
-		else
-			return(false);
+			else {			
+			setSlotsUsed(getSlotsUsed()-1);
+			result = '*';
+		    }
+	     }
+		return(result);
 	}
 	
 	public boolean includePoint(Point point) {

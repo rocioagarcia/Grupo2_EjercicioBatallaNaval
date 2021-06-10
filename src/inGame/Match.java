@@ -1,5 +1,7 @@
 package inGame;
 
+import java.util.Collection;
+
 import board.Board;
 import board.MainBoard;
 import board.PositionBoard;
@@ -9,6 +11,9 @@ import embarkation.Ship;
 import players.Player;
 
 public class Match {
+	public static final char DAMAGED = '*';
+	public static final char SUNKEN = 'X';
+	public static final char WATER = 'A';
 	private Turn nextTurn;
    
 	public Match() {
@@ -33,13 +38,15 @@ public class Match {
         turnPlayerStart(gm);
         Player p = getPlayerNextTurn();
         showPositionBoardOf(p);
-        showMainBoardOf(p);
-        for(int i = 1; i <= 10; i++) {
+        Player o = determineOpponent(p,gm);
+        showPositionBoardOf(o);
+        for(int i = 1; i <= 10; i++) {        	
 	        Point shot = p.shot();
 	        System.out.println("Disparo en: X-> "+(shot.getX()+1)+" Y-> "+(shot.getY()+1));
 	        if(resultShot(shot, p, gm)) {
 	        	System.out.println("Disparo exitoso");
 	        	showMainBoardOf(p);
+	        	showPositionBoardOf(o);
 	        }
 	        else
 	        	System.out.println("No se pudo realizar el disparo");
@@ -70,19 +77,16 @@ public class Match {
         boolean ok = false;
     	Player opponent = determineOpponent(player, gm);
     	if(!(opponent.getPositionBoard().isBusyIn(shot))) {
-    		markWater(shot, player.getMainBoard());
-    		markWater(shot, opponent.getPositionBoard());
+    		mark(WATER,shot, player.getMainBoard());
+    		mark(WATER,shot, opponent.getPositionBoard());
     		ok = true;
     	}
     	else if(ShipInPosition(shot, opponent.getFleet()) != null){
     		Ship s = ShipInPosition(shot, opponent.getFleet());
-    		if(s.recieveShot(shot, opponent.getPositionBoard(), player.getMainBoard()))
-    		     ok = true;
-    		else
-    		      ok=false;
+    		ok = markImpact(s.recieveShot(shot),s,shot, player.getMainBoard(), opponent.getPositionBoard());
     	}
     	else
-    		ok=false;
+    		ok = false;
         return (ok);
     }
     
@@ -90,9 +94,32 @@ public class Match {
     	return(f.shipIncludePoint(p));
     }
 	
-    public void markWater(Point shot, Board b) {
-    	b.markPosition(shot,'A');
+    public void mark(char mark, Point shot, Board b) {
+    	b.markPosition(shot, mark);
     }
+    
+    public void markSunken(char mark, Collection<Point>points, Board b) {
+    	b.markPointsBoard(points,mark);
+    }
+    
+   public boolean  markImpact(char res,Ship s, Point shot, MainBoard mb, PositionBoard pb){
+       boolean ok = true;
+	   switch (res) {
+    	case DAMAGED:{
+    		         mark(DAMAGED, shot, pb);
+    		         mark(DAMAGED, shot, mb);
+    	             break;}
+    	case SUNKEN:{
+    		        markSunken(	SUNKEN, s.getPoints(),pb);
+    		        markSunken(	SUNKEN, s.getPoints(),mb);
+                    break;
+                    }
+    	
+	   default:
+		         ok = false;
+       }
+	   return ok;
+   }
     
 	public Player determineOpponent(Player player, GameModes gm) {
 		if(player.getPlayerNumber() == 1)

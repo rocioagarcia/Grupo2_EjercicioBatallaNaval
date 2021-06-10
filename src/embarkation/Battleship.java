@@ -9,6 +9,6 @@ public class Battleship extends Ship {
 	}
 	
 	public void markPoints(PositionBoard pb) {
-		pb.markPointsPositionBoard(this.getPoints(), 'B');
+		pb.markPointsBoard(this.getPoints(), 'B');
 	}
 }
