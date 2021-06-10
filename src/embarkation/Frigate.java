@@ -13,7 +13,6 @@ public class Frigate extends Ship {
 	public boolean canPositionMyself(Point p, String orientation, PositionBoard pb) {
 		boolean ok = false;
 		if (!(pb.isBusyIn(p))) {
-			//pb.markPosition(p);
 			this.addPoint(p);
 			markPoints(pb);
 			ok = true;
@@ -22,6 +21,7 @@ public class Frigate extends Ship {
 	}
     
 	public void markPoints(PositionBoard pb) {
+		//marca con una F en cada posicion que ocupa en el tablero
 		pb.markPointsBoard(this.getPoints(), 'F');
 	}
 }

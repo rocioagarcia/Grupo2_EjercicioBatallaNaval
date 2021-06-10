@@ -9,6 +9,7 @@ public class Battleship extends Ship {
 	}
 	
 	public void markPoints(PositionBoard pb) {
+		//marca con una B en cada posicion que ocupa en el tablero
 		pb.markPointsBoard(this.getPoints(), 'B');
 	}
 }

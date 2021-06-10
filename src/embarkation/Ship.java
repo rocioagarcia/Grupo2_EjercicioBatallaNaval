@@ -123,6 +123,8 @@ public abstract class Ship {
 	}
 	
 	public boolean includePoint(Point point) {
+		//este metodo determina si esta en la posicion enviada por parametro,
+		//para ello itera en la coleccion de sus puntos verificando si tiene el punto enviado por parametro 
 		boolean ok = false;
 		if(!(points.isEmpty())) {
 			Iterator<Point> it = points.iterator();

@@ -8,7 +8,7 @@ public abstract class Board {
 	public static final int MAX = 10;
     protected char cells[][] = new char[10][10];
     
-	public Board() {
+	public Board() {// contructor que inicializa cad posicion del tablero con ' '
 		this.cells = new char [MAX][MAX];
 		for(int i = 0; i < MAX; i++ ) {
 			for(int j = 0; j < MAX;j++ )
@@ -49,14 +49,17 @@ public abstract class Board {
 	}
 
 	public boolean isBusyIn(Point p) {
+		//retorna true o false si la celda esta ocupada o no
 		return((this.cells[p.getX()][p.getY()]) != ' ');
 	}
 	
 	public void markPointsBoard(Collection<Point>arrayPoints, char c) {
+		//itera en la coleccion de puntos enviandose, al tablero la coordenada a marcar
 		arrayPoints.forEach(p->{markPosition(p, c);});
 	}
 	
 	public void markPosition(Point p, char c) {
+		//realiza la marca correspondiente a una posicion del tablero
 		this.cells[p.getX()][p.getY()] = c;
 	}
 

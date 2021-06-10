@@ -11,10 +11,12 @@ public class Computer extends Player {
 
 	@Override
 	public Point shot() {
+		//retorna el disparo random generado anteriormente
 		return (new Point(generateShot(),generateShot()));
 	}
 	
 	public int generateShot() {
+		//genera un disparon random
 		return ((int) (Math.random()*(9-0)) + 0);
 	}
 }

@@ -29,6 +29,8 @@ public class Fleet {
 	}
 	
 	public void createFleet() {
+		//creacion de las 9 embarcaciones.
+		// se crea un barco y se lo agrega a la coleccion de barcos del la flota.
 		addShip(new Frigate());
 		addShip(new Frigate());
 		addShip(new Destructor());
@@ -41,6 +43,10 @@ public class Fleet {
 	}
 	
 	public Ship shipIncludePoint(Point p) {
+		//este metodo determina si el barco esta en el punto enviado por parametro 
+		//itera en cada uno de sus barcos 
+		//envia el msj includePoint a cada barco para determinar si esta en ese punto
+		//retornará el barco contenido en esa posicion, en caso de no haber ningun barco retorna null
 		Iterator<Ship> it = ships.iterator();
 		Ship s = null;
 		boolean ok = false;		
