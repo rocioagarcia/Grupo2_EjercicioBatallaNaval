@@ -45,7 +45,7 @@ public abstract class Board {
 	}	
 	
 	public int generatePosition() {
-		return ((int) (Math.random()*(9-0)) + 0);
+		return ((int) (Math.random()*(9-0)) + 1);
 	}
 
 	public boolean isBusyIn(Point p) {

@@ -17,6 +17,6 @@ public class Computer extends Player {
 	
 	public int generateShot() {
 		//genera un disparon random
-		return ((int) (Math.random()*(9-0)) + 0);
+		return ((int) (Math.random()*(9-0)) + 1);
 	}
 }

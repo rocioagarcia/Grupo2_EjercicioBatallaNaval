@@ -55,7 +55,7 @@ public class Fleet {
 			if (s.includePoint(p))
 				ok = true;		
 	    }
-		return (s);
+		return ((ok)?s:null);
 	}
 	
 }
